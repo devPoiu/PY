@@ -1,4 +1,4 @@
-def xor(text: str, key: str):
+def xor(text, key):
     result = []
     key_length = len(key)
     

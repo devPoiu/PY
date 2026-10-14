@@ -13,22 +13,18 @@ class XorAnimator:
         self.root.geometry("750x700")  
         self.root.configure(bg="#1e1e1e")
 
-        # Дефолтные значения
         self.message = "Hello, World!"
         self.secret_key = "CODE"
         
-        # Динамические состояния
         self.current_text = self.message
         self.is_encrypting = True
         self.index = 0
         self.result_chars = list()       
         self.visual_positions = list()   
         
-        # Флаги управления анимацией
         self.is_paused = True  
         self.after_id = None  
 
-        # ШРИФТЫ
         self.title_font = ("Courier New", 18, "bold")
         self.mono_font = ("Courier New", 14, "bold")
         self.bit_font = ("Courier New", 22, "bold")
@@ -37,14 +33,12 @@ class XorAnimator:
         self.create_widgets()
         self.prepare_visual_text()
         
-        # БИНДИНГ КЛАВИШ
         self.root.bind("<space>", self.toggle_pause)
         self.root.bind("<r>", self.restart_animation)
         self.root.bind("<R>", self.restart_animation)
         self.root.bind("<KeyPress>", self.handle_global_key)
 
     def create_widgets(self):
-        # Панель ввода данных
         self.input_frame = tk.Frame(self.root, bg="#252526", bd=1, relief="solid")
         self.input_frame.pack(pady=10, fill="x", padx=40)
 
@@ -61,11 +55,9 @@ class XorAnimator:
         self.btn_start = tk.Button(self.input_frame, text="Запустить анимацию", font=("Courier New", 11, "bold"), bg="#4CAF50", fg="#ffffff", activebackground="#45a049", command=self.apply_user_input)
         self.btn_start.grid(row=0, column=2, rowspan=2, padx=15, pady=5, sticky="ns")
 
-        # Заголовок режима
         self.lbl_mode = tk.Label(self.root, text="ОЖИДАНИЕ СТАРТА", font=self.title_font, fg="#ffb74d", bg="#1e1e1e")
         self.lbl_mode.pack(pady=10)
 
-        # Фрейм для строк текста и ключа
         self.txt_frame = tk.Frame(self.root, bg="#2d2d2d", bd=2, relief="groove")
         self.txt_frame.pack(pady=10, fill="x", padx=40)
 
@@ -80,7 +72,6 @@ class XorAnimator:
         self.lbl_key_flow = tk.Label(self.txt_frame, text=self.secret_key, font=self.mono_font, fg="#ffb74d", bg="#2d2d2d")
         self.lbl_key_flow.grid(row=2, column=1, pady=5, sticky="w")
 
-        # Основная зона анимации битов
         self.bit_frame = tk.Frame(self.root, bg="#1e1e1e")
         self.bit_frame.pack(pady=20)
 
@@ -99,11 +90,9 @@ class XorAnimator:
         self.lbl_res_bit = tk.Label(self.bit_frame, text="00000000", font=self.bit_font, fg="#64b5f6", bg="#1e1e1e")
         self.lbl_res_bit.grid(row=3, column=1, padx=10, sticky="w")
 
-        # Строка числового результата
         self.lbl_full_result = tk.Label(self.root, text="Текущий сбор (коды шифра): ", font=self.mono_font, fg="#e0e0e0", bg="#1e1e1e", wraplength=700)
         self.lbl_full_result.pack(pady=10)
 
-        # Подсказка по горячим клавишам
         self.lbl_status = tk.Label(self.root, text="⌨️ [Пробел] — Пауза/Старт | [R] — Сбросить заново", font=self.hint_font, fg="#888888", bg="#1e1e1e")
         self.lbl_status.pack(side="bottom", pady=15)
 
